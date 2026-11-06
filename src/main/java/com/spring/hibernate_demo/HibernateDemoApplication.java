@@ -20,11 +20,12 @@ public class HibernateDemoApplication {
 	@Bean 
 	CommandLineRunner commandLineRunner (StudentDao studentDao) {
 		return runner -> {
-			// createStudent(studentDao);
+			createStudent(studentDao);
 			// readStudent(studentDao);
 			// queryStudents(studentDao);
 			// updateStudent(studentDao);
-			deleteStudent(studentDao);
+			// deleteStudent(studentDao);
+			// deleteAllStudent(studentDao);
 		};
 	}
 
@@ -37,6 +38,12 @@ public class HibernateDemoApplication {
 		Student student = new Student("Albedo",
 										"Kreideprinz",
 										"albedo.kreideprinz@kof.com");
+		// Student student2 = new Student("Juuzou",
+		// 								"Suzuya",
+		// 								"juuzou.suzuya@ccg.com");
+		// Student student3 = new Student("Ree",
+		// 								"Ash",
+		// 								"ree.ash@ccg.com");								
 		
 		System.out.println("Saving student information...");
 		studentDao.save(student);
@@ -85,5 +92,11 @@ public class HibernateDemoApplication {
 		System.out.println("Deleting id: " + id);
 
 		studentDao.deleteStudent(id);
+	}
+
+	private void deleteAllStudent(StudentDao studentDao){
+		System.out.println("Deleting all data...");
+		int deletedRows = studentDao.deleteAll();
+		System.out.println("Number of deleted rows: " + deletedRows);
 	}
 }
