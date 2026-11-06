@@ -7,8 +7,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-@Entity // sets a class mapped to a table.
-@Table(name="student") // specifies table name; optional
+/**
+ * Student class as entity.
+ */
+@Entity 
+@Table(name="student") 
 public class Student {
 
     /**
@@ -54,7 +57,7 @@ public class Student {
     }
 
     /**
-     * Getters and setters for all the fields
+     * Getters and setters for all the fields.
      * @return
      */
     public int getId() {
