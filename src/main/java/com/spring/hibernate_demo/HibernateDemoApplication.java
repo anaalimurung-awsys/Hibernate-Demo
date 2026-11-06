@@ -1,5 +1,7 @@
 package com.spring.hibernate_demo;
 
+import java.util.List;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,7 +21,10 @@ public class HibernateDemoApplication {
 	CommandLineRunner commandLineRunner (StudentDao studentDao) {
 		return runner -> {
 			// createStudent(studentDao);
-			readStudent(studentDao);
+			// readStudent(studentDao);
+			// queryStudents(studentDao);
+			// updateStudent(studentDao);
+			deleteStudent(studentDao);
 		};
 	}
 
@@ -29,9 +34,9 @@ public class HibernateDemoApplication {
 	 */
 	private void createStudent(StudentDao studentDao){
 		System.out.println("Creating student information...");
-		Student student = new Student("Ree",
-										"Ash",
-										"ree.ash@ccg.com");
+		Student student = new Student("Albedo",
+										"Kreideprinz",
+										"albedo.kreideprinz@kof.com");
 		
 		System.out.println("Saving student information...");
 		studentDao.save(student);
@@ -39,10 +44,46 @@ public class HibernateDemoApplication {
 		System.out.println("Saved. Generated id: " + student.getId());
 	}
 
+	/**
+	 * Method to read data from database
+	 * @param studentDao
+	 */
 	private void readStudent(StudentDao studentDao) {
 		Student student = studentDao.findById(2);
 		System.out.println("Retrieving student id " + student.getId());
 		
 		System.out.println("Found: " + student);
+	}
+
+	/**
+	 * Method to select data.
+	 * @param studentDao
+	 */
+	private void queryStudents(StudentDao studentDao) {
+		List<Student> students = studentDao.findAll();
+
+		for(Student s : students) {
+			System.out.println(s);
+		}
+	}
+
+	private void updateStudent(StudentDao studentDao) {
+		int id = 1;
+		System.out.println("Student ID: " + id);
+		Student stud = studentDao.findById(id);
+
+		System.out.println("Updating student name...");
+		stud.setFirstName("Rei");
+
+		studentDao.update(stud);
+
+		System.out.println("Updated student information: " + stud);
+	}
+
+	private void deleteStudent(StudentDao studentDao){
+		int id = 2;
+		System.out.println("Deleting id: " + id);
+
+		studentDao.deleteStudent(id);
 	}
 }
