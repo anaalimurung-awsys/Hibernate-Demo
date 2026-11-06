@@ -17,6 +17,11 @@ public class HibernateDemoApplication {
 		SpringApplication.run(HibernateDemoApplication.class, args);
 	}
 
+	/**
+	 * This is the command line runner.
+	 * @param studentDao
+	 * @return
+	 */
 	@Bean 
 	CommandLineRunner commandLineRunner (StudentDao studentDao) {
 		return runner -> {
@@ -38,15 +43,17 @@ public class HibernateDemoApplication {
 		Student student = new Student("Albedo",
 										"Kreideprinz",
 										"albedo.kreideprinz@kof.com");
-		// Student student2 = new Student("Juuzou",
-		// 								"Suzuya",
-		// 								"juuzou.suzuya@ccg.com");
-		// Student student3 = new Student("Ree",
-		// 								"Ash",
-		// 								"ree.ash@ccg.com");								
+		Student student2 = new Student("Juuzou",
+										"Suzuya",
+										"juuzou.suzuya@ccg.com");
+		Student student3 = new Student("Ree",
+										"Ash",
+										"ree.ash@ccg.com");								
 		
 		System.out.println("Saving student information...");
 		studentDao.save(student);
+		studentDao.save(student2);
+		studentDao.save(student3);
 
 		System.out.println("Saved. Generated id: " + student.getId());
 	}
@@ -74,6 +81,10 @@ public class HibernateDemoApplication {
 		}
 	}
 
+	/**
+	 * Method to update data.
+	 * @param studentDao
+	 */
 	private void updateStudent(StudentDao studentDao) {
 		int id = 1;
 		System.out.println("Student ID: " + id);
@@ -87,6 +98,10 @@ public class HibernateDemoApplication {
 		System.out.println("Updated student information: " + stud);
 	}
 
+	/**
+	 * Method to delete information.
+	 * @param studentDao
+	 */
 	private void deleteStudent(StudentDao studentDao){
 		int id = 2;
 		System.out.println("Deleting id: " + id);
@@ -94,6 +109,10 @@ public class HibernateDemoApplication {
 		studentDao.deleteStudent(id);
 	}
 
+	/**
+	 * Method to delete all information
+	 * @param studentDao
+	 */
 	private void deleteAllStudent(StudentDao studentDao){
 		System.out.println("Deleting all data...");
 		int deletedRows = studentDao.deleteAll();

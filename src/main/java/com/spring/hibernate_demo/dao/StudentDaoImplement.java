@@ -11,7 +11,6 @@ import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 
 /**
- * 
  * StudentDaoImplement.
  * for CRUD
  */
@@ -36,7 +35,9 @@ public class StudentDaoImplement implements StudentDao {
 
     @Override
     public List<Student> findAll() {
-        TypedQuery<Student> query = em.createQuery("FROM Student order by lastName", Student.class);
+        TypedQuery<Student> query = 
+            em.createQuery("FROM Student order by lastName", Student.class);
+        
         return query.getResultList();
     }
 
@@ -60,4 +61,12 @@ public class StudentDaoImplement implements StudentDao {
        return numRows;
     }
     
+    @Override 
+    public List<Student> findByLastName(String lastName){
+        TypedQuery<Student> query = 
+            em.createQuery("FROM Student WHERE lastName=:data", Student.class);
+        
+        query.setParameter("data", lastName);
+        return query.getResultList();
+    }
 }
