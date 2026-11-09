@@ -1,10 +1,12 @@
 package com.spring.hibernate_demo.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity 
@@ -21,6 +23,12 @@ public class InstructorDetail {
 
     @Column(name="hobby")
     private String hobby;
+
+    @OneToOne (mappedBy="instructorInfo", cascade={CascadeType.DETACH,
+                                                    CascadeType.MERGE,
+                                                    CascadeType.PERSIST,
+                                                    CascadeType.REFRESH})
+    private Instructor instructor;
 
     public InstructorDetail(){}
 
@@ -52,6 +60,14 @@ public class InstructorDetail {
     public void setHobby(String hobby) {
         this.hobby = hobby;
     }
+    
+    public Instructor getInstructor() {
+        return instructor;
+    }
+    
+    public void setInstructor(Instructor instructor) {
+        this.instructor = instructor;
+    }
 
     @Override
     public String toString() {
@@ -59,6 +75,4 @@ public class InstructorDetail {
         ", subject = " + subject + 
         ", hobby = " + hobby + "]";
     }
-
-    
 }

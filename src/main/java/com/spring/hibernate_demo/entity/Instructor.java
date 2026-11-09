@@ -86,6 +86,4 @@ public class Instructor {
             + ", lastName = " + lastName 
             + ", email = " + email + "]";
     }
-
-    
 }
