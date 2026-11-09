@@ -1,5 +1,8 @@
 package com.spring.hibernate_demo.dao;
 
+import java.util.List;
+
+import com.spring.hibernate_demo.entity.Course;
 import com.spring.hibernate_demo.entity.Instructor;
 import com.spring.hibernate_demo.entity.InstructorDetail;
 
@@ -9,4 +12,5 @@ public interface AppDao {
     InstructorDetail findInstructorDetailsById(int id);
     void deleteInstructorById(int id);
     void deleteInstructorDetailById(int id);
+    List<Course> findCoursesByInstructorId(int id);
 }

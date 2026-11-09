@@ -1,9 +1,13 @@
 package com.spring.hibernate_demo;
 
 import com.spring.hibernate_demo.dao.AppDao;
+import com.spring.hibernate_demo.entity.Course;
 // import com.spring.hibernate_demo.dao.StudentDao;
 import com.spring.hibernate_demo.entity.Instructor;
 import com.spring.hibernate_demo.entity.InstructorDetail;
+
+import java.util.List;
+
 // import com.spring.hibernate_demo.entity.Student;
 // import java.util.List;
 import org.springframework.boot.CommandLineRunner;
@@ -34,7 +38,9 @@ public class HibernateDemoApplication {
 			// findInstructor(app);
 			// deleteInstructor(app);
 			// findInstructorDetail(app);
-			//  deleteInstructorDetail(app);
+			// deleteInstructorDetail(app);
+			// createInstructorWithCourses(app);
+			findInstructorWithCourses(app);
 
 		/* --- THESE METHODS ARE FROM THE MAIN BRANCH --- */
 			// createStudent(studentDao);
@@ -87,6 +93,10 @@ public class HibernateDemoApplication {
 		app.save(teach4);
 	}
 
+	/**
+	 * Method to search for instructor id.
+	 * @param app
+	 */
 	private void findInstructor(AppDao app){
 		int id = 2;
 		System.out.println("Find id: " + id);
@@ -97,6 +107,10 @@ public class HibernateDemoApplication {
 		System.out.println("Details: " + teach.getInstructorInfo());
 	}
 
+	/**
+	 * Method to delete Instructor using id.
+	 * @param app
+	 */
 	private void deleteInstructor(AppDao app){
 		int id = 1;
 		System.out.println("Deleting id: " + id);
@@ -106,6 +120,10 @@ public class HibernateDemoApplication {
 		System.out.println("Deleted successfully");
 	}
 
+	/**
+	 * Method to find instructor's detail by id.
+	 * @param app
+	 */
 	private void findInstructorDetail(AppDao app){
 		int id = 3;
 		InstructorDetail tInfo = app.findInstructorDetailsById(id);
@@ -114,12 +132,49 @@ public class HibernateDemoApplication {
 		System.out.println("Instructor: " + tInfo.getInstructor());
 	}
 
+	/**
+	 * Method to delete instructor details by id.
+	 * @param app
+	 */
 	private void deleteInstructorDetail(AppDao app){
 		int id = 3;
 		System.out.println("Deleting id: " + id);
 
 		app.deleteInstructorDetailById(id);
 		System.out.println("Delete successful.");
+	}
+	
+	private void createInstructorWithCourses(AppDao app) {
+		Instructor teach1 = new Instructor("Minerva",
+											"McGonagall",
+											"minerva.mcgonagall@hww.com");
+		InstructorDetail info1 = new InstructorDetail("Transfiguration",
+														"Transfiguring things");	
+		
+		teach1.setInstructorInfo(info1);
+
+		Course course1 = new Course("Bio-transfiguration");
+		Course course2 = new Course("Alchemy");
+
+		teach1.add(course1);
+		teach1.add(course2);
+
+		System.out.println("Courses saved: " + teach1.getCourses());
+		app.save(teach1);
+	}
+
+	private void findInstructorWithCourses(AppDao app) {
+		int id = 5;
+		
+		System.out.println("Find instructor id: " + id);
+		Instructor teach = app.findInstructorById(id);
+
+		System.out.println("Instructor: " + teach);
+		System.out.println("Courses from id: " + id);
+
+		List<Course> courses = app.findCoursesByInstructorId(id);
+		teach.setCourses(courses);
+		System.out.println(teach.getCourses());
 	}
 }
 

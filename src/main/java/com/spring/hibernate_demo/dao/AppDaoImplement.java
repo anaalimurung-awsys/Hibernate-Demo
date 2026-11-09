@@ -1,10 +1,14 @@
 package com.spring.hibernate_demo.dao;
 
+import com.spring.hibernate_demo.entity.Course;
 import com.spring.hibernate_demo.entity.Instructor;
 import com.spring.hibernate_demo.entity.InstructorDetail;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 
 @Repository 
@@ -47,5 +51,17 @@ public class AppDaoImplement implements AppDao {
 
         info.getInstructor().setInstructorInfo(null);
         em.remove(info);
+    }
+
+    @Override 
+    public List<Course> findCoursesByInstructorId(int id) {
+        TypedQuery<Course> query = em.createQuery(
+            "FROM Course WHERE instructor.id=:data", Course.class);
+        
+        query.setParameter("data", id);
+
+        List<Course> courses = query.getResultList();
+
+        return courses;
     }
 }
