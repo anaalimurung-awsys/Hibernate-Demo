@@ -23,12 +23,15 @@ public class HibernateDemoApplication {
 	/**
 	 * This is the command line runner.
 	 * @param app
+	 * @param studentDao
 	 * @return
 	 */
 	@Bean 
 	CommandLineRunner commandLineRunner (AppDao app) {
 		return runner -> {
-			createInstructor(app);
+			// createInstructor(app);
+			// findInstructor(app);
+			deleteInstructor(app);
 
 			/* --- THESE METHODS ARE FROM THE MAIN BRANCH --- */
 			// createStudent(studentDao);
@@ -51,10 +54,39 @@ public class HibernateDemoApplication {
 		InstructorDetail info = new InstructorDetail("Homeroom",
 													"Taking care of cats");
 		
+		Instructor teach2 = new Instructor("Irina",
+											"Jelavic",
+											"irina.jelavic@sangumi.com");
+		InstructorDetail info2 = new InstructorDetail("English",
+													"Pedicure");
+
 		// this associates the objects
 		teach1.setInstructorInfo(info);
+		teach2.setInstructorInfo(info2);
+
 		System.out.println("Details saved!");
 		app.save(teach1);
+		app.save(teach2);
 	}
+
+	private void findInstructor(AppDao app){
+		int id = 2;
+		System.out.println("Find id: " + id);
+
+		Instructor teach = app.findInstructorById(id);
+
+		System.out.println("Instructor: " + teach);
+		System.out.println("Details: " + teach.getInstructorInfo());
+	}
+
+	private void deleteInstructor(AppDao app){
+		int id = 1;
+		System.out.println("Deleting id: " + id);
+
+		app.deleteInstructorById(id);
+
+		System.out.println("Deleted successfully");
+	}
+
 }
 
