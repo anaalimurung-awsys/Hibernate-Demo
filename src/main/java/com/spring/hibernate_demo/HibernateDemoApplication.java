@@ -1,14 +1,14 @@
 package com.spring.hibernate_demo;
 
+import com.spring.hibernate_demo.dao.StudentDao;
+import com.spring.hibernate_demo.entity.Student;
 import java.util.List;
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import com.spring.hibernate_demo.dao.StudentDao;
-import com.spring.hibernate_demo.entity.Student;
+
 
 @SpringBootApplication
 public class HibernateDemoApplication {
@@ -40,22 +40,22 @@ public class HibernateDemoApplication {
 	 */
 	private void createStudent(StudentDao studentDao){
 		System.out.println("Creating student information...");
-		Student student = new Student("Albedo",
+		Student student6 = new Student("Rubedo",
 										"Kreideprinz",
-										"albedo.kreideprinz@kof.com");
-		Student student2 = new Student("Juuzou",
-										"Suzuya",
-										"juuzou.suzuya@ccg.com");
-		Student student3 = new Student("Ree",
-										"Ash",
-										"ree.ash@ccg.com");								
+										"rubedo.kreideprinz@kof.com");
+		Student student5 = new Student("Klee",
+										"Kreideprinz",
+										"klee.kreideprinz@kof.com");
+		Student student4 = new Student("Lune",
+										"Kreideprinz",
+										"lune.kreideprinz@hex.com");								
 		
 		System.out.println("Saving student information...");
-		studentDao.save(student);
-		studentDao.save(student2);
-		studentDao.save(student3);
+		studentDao.save(student4);
+		studentDao.save(student5);
+		studentDao.save(student6);
 
-		System.out.println("Saved. Generated id: " + student.getId());
+		System.out.println("Saved. Generated id: " + student4.getId());
 	}
 
 	/**
