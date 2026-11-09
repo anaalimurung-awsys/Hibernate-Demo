@@ -16,7 +16,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 
-
 @SpringBootApplication
 public class HibernateDemoApplication {
 
@@ -40,7 +39,8 @@ public class HibernateDemoApplication {
 			// findInstructorDetail(app);
 			// deleteInstructorDetail(app);
 			// createInstructorWithCourses(app);
-			findInstructorWithCourses(app);
+			// findInstructorWithCourses(app);
+			findInstructorWithCoursesJoinFetch(app);
 
 		/* --- THESE METHODS ARE FROM THE MAIN BRANCH --- */
 			// createStudent(studentDao);
@@ -144,6 +144,10 @@ public class HibernateDemoApplication {
 		System.out.println("Delete successful.");
 	}
 	
+	/**
+	 * Method to create instructors with courses.
+	 * @param app
+	 */
 	private void createInstructorWithCourses(AppDao app) {
 		Instructor teach1 = new Instructor("Minerva",
 											"McGonagall",
@@ -163,6 +167,10 @@ public class HibernateDemoApplication {
 		app.save(teach1);
 	}
 
+	/**
+	 * Method to find instructor thru courses
+	 * @param app
+	 */
 	private void findInstructorWithCourses(AppDao app) {
 		int id = 5;
 		
@@ -175,6 +183,20 @@ public class HibernateDemoApplication {
 		List<Course> courses = app.findCoursesByInstructorId(id);
 		teach.setCourses(courses);
 		System.out.println(teach.getCourses());
+	}
+
+	/**
+	 * Method to find instructor thru courses with join fetch.
+	 * @param app
+	 */
+	private void findInstructorWithCoursesJoinFetch(AppDao app) {
+		int id = 5;
+		System.out.println("Find instructor id: " + id);
+		
+		Instructor teach = app.findInstructorByIdJoinFetch(id);
+
+		System.out.println("Instructor: " + teach);
+		System.out.println("Courses: " + teach.getCourses());
 	}
 }
 
