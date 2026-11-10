@@ -40,5 +40,8 @@ public class Review {
         this.comments = comments;
     }
 
-    
+    @Override
+    public String toString() {
+        return "Review [comments=" + comments + "\n]";
+    }
 }

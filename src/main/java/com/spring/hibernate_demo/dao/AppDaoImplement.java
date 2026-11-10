@@ -96,4 +96,26 @@ public class AppDaoImplement implements AppDao {
     public void update(Instructor in){
         em.merge(in);
     }
+
+    @Override 
+    public Course findCourseAndReviewsByCourseId(int id) {
+        TypedQuery<Course> query = em.createQuery(
+                "SELECT c FROM Course c " + 
+                "JOIN FETCH c.review " +
+                "WHERE c.id=:data",
+                Course.class  
+        );
+
+        query.setParameter("data", id);
+        Course course = query.getSingleResult();
+
+        return course;
+    }
+
+    @Override 
+    @Transactional 
+    public void deleteCourseById(int id) {
+        Course course = em.find(Course.class, id);
+        em.remove(course);
+    }
 }

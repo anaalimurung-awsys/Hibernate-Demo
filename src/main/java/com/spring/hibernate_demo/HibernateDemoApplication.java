@@ -33,6 +33,14 @@ public class HibernateDemoApplication {
 	@Bean 
 	CommandLineRunner commandLineRunner (AppDao app) {
 		return runner -> {
+		/* --- THESE METHODS ARE FROM THE MAIN BRANCH --- */
+			// createStudent(studentDao);
+			// readStudent(studentDao);
+			// queryStudents(studentDao);
+			// updateStudent(studentDao);
+			// deleteStudent(studentDao);
+			// deleteAllStudent(studentDao);
+
 		/* --- THESE METHODS ARE FROM THE SECOND BRANCH --- */
 			// createInstructor(app);
 			// findInstructor(app);
@@ -44,15 +52,9 @@ public class HibernateDemoApplication {
 			// findInstructorWithCoursesJoinFetch(app);
 			// updateInstructor(app);
 			// deleteInstructorOnly(app);
-			createCourseAndReviews(app);
-
-		/* --- THESE METHODS ARE FROM THE MAIN BRANCH --- */
-			// createStudent(studentDao);
-			// readStudent(studentDao);
-			// queryStudents(studentDao);
-			// updateStudent(studentDao);
-			// deleteStudent(studentDao);
-			// deleteAllStudent(studentDao);
+			// createCourseAndReviews(app);
+			// retrieveCourseAndReviews(app);
+			deleteCourseAndReviews(app);
 		};
 	}
 
@@ -231,6 +233,10 @@ public class HibernateDemoApplication {
 		System.out.println("Deleted successfully");
 	}
 
+	/**
+	 * 
+	 * @param app
+	 */
 	private void createCourseAndReviews(AppDao app) {
 		Course c = new Course("How to Speed Run Spring in 2 hours");
 
@@ -240,6 +246,32 @@ public class HibernateDemoApplication {
 
 		System.out.println("Course saved");
 		app.save(c);
+	}
+
+	/**
+	 * 
+	 * @param app
+	 */
+	private void retrieveCourseAndReviews(AppDao app) {
+		int id = 7;
+		System.out.println("Get course and reviews of " + id);
+
+		Course course = app.findCourseAndReviewsByCourseId(id);
+		System.out.println(course);
+		System.out.println(course.getReview());
+	}
+
+	/**
+	 * 
+	 * @param app
+	 */
+	private void deleteCourseAndReviews(AppDao app) {
+		int id = 7;
+		System.out.println("Deleting course: " + id);
+		
+		app.deleteCourseById(id);
+
+		System.out.println("Delete successful.");
 	}
 }
 

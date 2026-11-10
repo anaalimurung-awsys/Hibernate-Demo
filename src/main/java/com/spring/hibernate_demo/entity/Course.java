@@ -67,7 +67,15 @@ public class Course {
     public void setInstructor(Instructor instructor) {
         this.instructor = instructor;
     }
-
+    
+    public List<Review> getReview() {
+        return review;
+    }
+    
+    public void setReview(List<Review> review) {
+        this.review = review;
+    }
+    
     @Override
     public String toString() {
         return "Course [id=" + id + ", title=" + title + ", instructor=" + instructor + "]";
