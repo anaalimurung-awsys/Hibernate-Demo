@@ -41,6 +41,12 @@ public class AppDaoImplement implements AppDao {
     public void deleteInstructorById(int id){
         Instructor ins = em.find(Instructor.class, id);
 
+        // set associations to null
+        List<Course> cs = ins.getCourses();
+        for (Course c : cs) {
+            c.setInstructor(null);
+        }
+
         em.remove(ins);
     }
 
@@ -67,12 +73,21 @@ public class AppDaoImplement implements AppDao {
 
     @Override 
     public Instructor findInstructorByIdJoinFetch(int id){
+
         TypedQuery<Instructor> query = em.createQuery(
-            "SELECT ins from Instructor ins JOIN FETCH ins.courses WHERE ins.id=:data",
+            "SELECT ins from Instructor ins " + 
+            "JOIN FETCH ins.courses " + 
+            "WHERE ins.id=:data",
             Instructor.class);
         query.setParameter("data", id);
 
         Instructor teach = query.getSingleResult();
         return teach;
+    }
+
+    @Override 
+    @Transactional 
+    public void update(Instructor in){
+        em.merge(in);
     }
 }

@@ -40,7 +40,9 @@ public class HibernateDemoApplication {
 			// deleteInstructorDetail(app);
 			// createInstructorWithCourses(app);
 			// findInstructorWithCourses(app);
-			findInstructorWithCoursesJoinFetch(app);
+			// findInstructorWithCoursesJoinFetch(app);
+			// updateInstructor(app);
+			deleteInstructorOnly(app);
 
 		/* --- THESE METHODS ARE FROM THE MAIN BRANCH --- */
 			// createStudent(studentDao);
@@ -149,16 +151,16 @@ public class HibernateDemoApplication {
 	 * @param app
 	 */
 	private void createInstructorWithCourses(AppDao app) {
-		Instructor teach1 = new Instructor("Minerva",
-											"McGonagall",
-											"minerva.mcgonagall@hww.com");
-		InstructorDetail info1 = new InstructorDetail("Transfiguration",
-														"Transfiguring things");	
+		Instructor teach1 = new Instructor("Albedo",
+											"Kreidiprinz",
+											"albedo.kreidiprinz@kof.com");
+		InstructorDetail info1 = new InstructorDetail("Alchemy",
+														"Making art");	
 		
 		teach1.setInstructorInfo(info1);
 
-		Course course1 = new Course("Bio-transfiguration");
-		Course course2 = new Course("Alchemy");
+		Course course1 = new Course("Alchemy");
+		Course course2 = new Course("Art");
 
 		teach1.add(course1);
 		teach1.add(course2);
@@ -197,6 +199,30 @@ public class HibernateDemoApplication {
 
 		System.out.println("Instructor: " + teach);
 		System.out.println("Courses: " + teach.getCourses());
+	}
+
+	private void updateInstructor(AppDao app) {
+		int id = 3;
+
+		Instructor ins = app.findInstructorById(id);
+
+		ins.setLastName("Karasuma");
+		
+		System.out.println("Updated");
+		app.update(ins);
+	}
+
+	/**
+	 * Method to delete instructor without deleting the course
+	 * associated with it.
+	 * @param app
+	 */
+	private void deleteInstructorOnly(AppDao app) {
+		int id = 7;
+		System.out.println("Delete instructor: " + id);
+
+		app.deleteInstructorById(id);
+		System.out.println("Deleted successfully");
 	}
 }
 
