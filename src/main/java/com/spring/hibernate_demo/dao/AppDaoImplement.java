@@ -3,6 +3,7 @@ package com.spring.hibernate_demo.dao;
 import com.spring.hibernate_demo.entity.Course;
 import com.spring.hibernate_demo.entity.Instructor;
 import com.spring.hibernate_demo.entity.InstructorDetail;
+import com.spring.hibernate_demo.entity.Student;
 
 import java.util.List;
 
@@ -117,5 +118,56 @@ public class AppDaoImplement implements AppDao {
     public void deleteCourseById(int id) {
         Course course = em.find(Course.class, id);
         em.remove(course);
+    }
+
+    @Override 
+    public Course findCourseAndStudentByCourseId(int id) {
+        TypedQuery<Course> query = em.createQuery(
+            "SELECT c FROM Course c " +
+            "JOIN FETCH c.students " +
+            "WHERE c.id=:data",
+            Course.class
+        );
+
+        query.setParameter("data", id);
+        Course course = query.getSingleResult();
+
+        return course;
+    }
+
+    @Override 
+    public Student findStudentAndCoursesByStudentId(int id){
+        TypedQuery<Student> query = em.createQuery(
+            "SELECT s FROM Student s JOIN FETCH s.courses WHERE s.id=:data",
+            Student.class  
+        );
+
+        query.setParameter("data", id);
+
+        Student stud = query.getSingleResult();
+
+        return stud;
+    }
+
+    @Override 
+    @Transactional 
+    public void update(Student stud){
+        em.merge(stud);
+    }
+
+    @Override 
+    @Transactional 
+    public void deleteStudentById(int id) {
+        Student stud = em.find(Student.class, id);
+
+        if (stud != null) {
+            List<Course> course = stud.getCourses();
+
+            for (Course c : course) {
+                c.getStudents().remove(stud);
+            }
+        }
+
+        em.remove(stud);
     }
 }
