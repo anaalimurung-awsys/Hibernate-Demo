@@ -1,14 +1,18 @@
 package com.spring.hibernate_demo.entity;
 
-import jakarta.annotation.Generated;
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity 
 public class Course {
@@ -28,6 +32,10 @@ public class Course {
     })
     @JoinColumn (name="instructor_id")
     private Instructor instructor;
+
+    @OneToMany (fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name="course_id")
+    private List<Review> review;
 
     public Course() {
     }
@@ -63,5 +71,11 @@ public class Course {
     @Override
     public String toString() {
         return "Course [id=" + id + ", title=" + title + ", instructor=" + instructor + "]";
+    }
+
+    public void addReview(Review rev){
+        if(review == null) review = new ArrayList<>();
+
+        review.add(rev);
     }
 }

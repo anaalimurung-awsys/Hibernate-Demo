@@ -5,6 +5,7 @@ import com.spring.hibernate_demo.entity.Course;
 // import com.spring.hibernate_demo.dao.StudentDao;
 import com.spring.hibernate_demo.entity.Instructor;
 import com.spring.hibernate_demo.entity.InstructorDetail;
+import com.spring.hibernate_demo.entity.Review;
 
 import java.util.List;
 
@@ -42,7 +43,8 @@ public class HibernateDemoApplication {
 			// findInstructorWithCourses(app);
 			// findInstructorWithCoursesJoinFetch(app);
 			// updateInstructor(app);
-			deleteInstructorOnly(app);
+			// deleteInstructorOnly(app);
+			createCourseAndReviews(app);
 
 		/* --- THESE METHODS ARE FROM THE MAIN BRANCH --- */
 			// createStudent(studentDao);
@@ -201,6 +203,10 @@ public class HibernateDemoApplication {
 		System.out.println("Courses: " + teach.getCourses());
 	}
 
+	/**
+	 * 
+	 * @param app
+	 */
 	private void updateInstructor(AppDao app) {
 		int id = 3;
 
@@ -223,6 +229,17 @@ public class HibernateDemoApplication {
 
 		app.deleteInstructorById(id);
 		System.out.println("Deleted successfully");
+	}
+
+	private void createCourseAndReviews(AppDao app) {
+		Course c = new Course("How to Speed Run Spring in 2 hours");
+
+		c.addReview(new Review("Thanks for the run, I have a test tomorrow"));
+		c.addReview(new Review("Loved it but I wanted the speed 0.75x"));
+		c.addReview(new Review("Challenge: do a 3x speed"));
+
+		System.out.println("Course saved");
+		app.save(c);
 	}
 }
 

@@ -25,7 +25,13 @@ public class AppDaoImplement implements AppDao {
     public void save(Instructor theTeacher) {
             em.persist(theTeacher);
     }
-    
+
+    @Override 
+    @Transactional 
+    public void save(Course theCourse) {
+            em.persist(theCourse);
+    }
+
     @Override 
     public Instructor findInstructorById(int id){
         return em.find(Instructor.class, id);
