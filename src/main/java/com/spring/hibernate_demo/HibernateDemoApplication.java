@@ -18,7 +18,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-
+/**
+ * HibernateDemoApplication.
+ * Used for testing cases
+ * Serves as the main class
+ */
 @SpringBootApplication
 public class HibernateDemoApplication {
 
@@ -66,7 +70,7 @@ public class HibernateDemoApplication {
 		};
 	}
 
-		/**
+	/**
 	 * Method to create student information.
 	 * @param studentDao
 	 */
@@ -299,7 +303,7 @@ public class HibernateDemoApplication {
 	}
 
 	/**
-	 * 
+	 * Method to update details of instructor.
 	 * @param app
 	 */
 	private void updateInstructor(AppDao app) {
@@ -327,7 +331,7 @@ public class HibernateDemoApplication {
 	}
 
 	/**
-	 * 
+	 * Method to create reviews for a course.
 	 * @param app
 	 */
 	private void createCourseAndReviews(AppDao app) {
@@ -342,7 +346,7 @@ public class HibernateDemoApplication {
 	}
 
 	/**
-	 * 
+	 * Method to retrieve courses and its reviews.
 	 * @param app
 	 */
 	private void retrieveCourseAndReviews(AppDao app) {
@@ -355,7 +359,7 @@ public class HibernateDemoApplication {
 	}
 
 	/**
-	 * 
+	 * Method to delete course and its review.
 	 * @param app
 	 */
 	private void deleteCourseAndReviews(AppDao app) {
@@ -368,7 +372,7 @@ public class HibernateDemoApplication {
 	}
 
 	/**
-	 * 
+	 * Method to create students with courses.
 	 * @param app
 	 */
 	private void createCourseAndStudents(AppDao app) {
@@ -389,7 +393,9 @@ public class HibernateDemoApplication {
 	}
 
 	/**
-	 * 
+	 * Method to find courses and students.
+	 * Using Course as the owning table
+	 * Through Join query 
 	 * @param app
 	 */
 	private void findCourseAndStudents(AppDao app) {
@@ -401,6 +407,12 @@ public class HibernateDemoApplication {
 		System.out.println("Students: " + course.getStudents());
 	}
 
+	/**
+	 * Method to find student and courses.
+	 * Using Student as the owning table
+	 * Through Join query
+	 * @param app
+	 */
 	private void findStudentAndCourses(AppDao app) {
 		int id = 1;
 
@@ -410,6 +422,10 @@ public class HibernateDemoApplication {
 		System.out.println("Courses: " + stud.getCourses());
 	}
 
+	/**
+	 * Method to add courses for students.
+	 * @param app
+	 */
 	private void addMoreCoursesForStudents(AppDao app) {
 		int id = 2;
 		Student student1 = app.findStudentAndCoursesByStudentId(id);
@@ -427,6 +443,10 @@ public class HibernateDemoApplication {
 		app.update(student1);
 	}
 
+	/**
+	 * Method to delete course by id.
+	 * @param app
+	 */
 	private void deleteCourseById(AppDao app) {
 		int id = 9;
 		System.out.println("Delete course " + id);
@@ -436,6 +456,10 @@ public class HibernateDemoApplication {
 		System.out.println("Delete successful");
 	}
 
+	/**
+	 * Method to delete student by id
+	 * @param app
+	 */
 	private void deleteStudent(AppDao app) {
 		int id = 4;
 		System.out.println("Delete stud: " + id);

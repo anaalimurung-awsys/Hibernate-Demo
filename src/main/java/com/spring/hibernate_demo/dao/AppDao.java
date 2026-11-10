@@ -7,20 +7,27 @@ import com.spring.hibernate_demo.entity.Instructor;
 import com.spring.hibernate_demo.entity.InstructorDetail;
 import com.spring.hibernate_demo.entity.Student;
 
+/**
+ * Interface for Data Access Object
+ * AppDao interface.
+ */
 public interface AppDao {
-    void save(Instructor theTeacher);
     void save(Course theCourse);
-    Instructor findInstructorById(int id);
-    InstructorDetail findInstructorDetailsById(int id);
-    List<Course> findCoursesByInstructorId(int id);
-    Instructor findInstructorByIdJoinFetch(int id);
+    void save(Instructor theTeacher);
+    
     Course findCourseAndReviewsByCourseId(int id);
+    Course findCourseAndStudentByCourseId(int id);
+    InstructorDetail findInstructorDetailsById(int id);
+    Instructor findInstructorById(int id);
+    Instructor findInstructorByIdJoinFetch(int id);
+    List<Course> findCoursesByInstructorId(int id);
+    Student findStudentAndCoursesByStudentId(int id);
+
+    void deleteCourseById(int id);
     void deleteInstructorById(int id);
     void deleteInstructorDetailById(int id);
-    void deleteCourseById(int id);
+    void deleteStudentById(int id);
+    
     void update(Instructor in);
     void update(Student stud);
-    Course findCourseAndStudentByCourseId(int id);
-    Student findStudentAndCoursesByStudentId(int id);
-    void deleteStudentById(int id);
 }

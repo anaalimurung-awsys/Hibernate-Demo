@@ -1,9 +1,5 @@
 package com.spring.hibernate_demo.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.hibernate.annotations.ManyToAny;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -14,6 +10,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Student class as entity.
@@ -108,7 +106,15 @@ public class Student {
     public void setEmail(String email) {
         this.email = email;
     }
+    
+    public List<Course> getCourses() {
+        return courses;
+    }
 
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+    
     @Override 
     public String toString() {
         return "Student [id=" + id
@@ -117,6 +123,11 @@ public class Student {
                 + ", email=" + email + "]";
     }
 
+    /**
+     * Method to add course using the List field
+     * of the Course
+     * @param course
+     */
     public void addCourse(Course course) {
         if(courses == null) courses = new ArrayList<>();
 
@@ -124,11 +135,4 @@ public class Student {
         course.addStudent(this);
     }
 
-    public List<Course> getCourses() {
-        return courses;
-    }
-
-    public void setCourses(List<Course> courses) {
-        this.courses = courses;
-    }
 }

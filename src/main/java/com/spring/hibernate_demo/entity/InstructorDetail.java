@@ -9,6 +9,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
+/**
+ * InstructorDetail class.
+ */
 @Entity 
 @Table(name="instructor_detail")
 public class InstructorDetail {
@@ -37,6 +40,10 @@ public class InstructorDetail {
         this.hobby = hobby;
     }
 
+    /**
+     * Getters and setters for all the fields.
+     * @return
+     */
     public int getId() {
         return id;
     }

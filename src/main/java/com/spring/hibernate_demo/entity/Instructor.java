@@ -15,7 +15,6 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 /**
- * 
  * Instructor class.
  */
 
@@ -50,12 +49,22 @@ public class Instructor {
     public Instructor() {
     }
 
+    /**
+     * Parametized constructor for Instructor.
+     * @param firstName
+     * @param lastName
+     * @param email
+     */
     public Instructor(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
     }
 
+    /**
+     * Getters and setters for all the fields.
+     * @return
+     */
     public int getId() {
         return id;
     }
@@ -124,5 +133,4 @@ public class Instructor {
 
         tCourse.setInstructor(this);
     }
-
 }

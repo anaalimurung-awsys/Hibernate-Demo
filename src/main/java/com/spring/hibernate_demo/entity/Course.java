@@ -16,6 +16,9 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
+/**
+ * Course class.
+ */
 @Entity 
 public class Course {
 
@@ -48,13 +51,24 @@ public class Course {
         inverseJoinColumns = @JoinColumn (name="student_id"))
     private List<Student> students;
 
+    /**
+     * Non-parameterized constructor.
+     */
     public Course() {
     }
 
+    /**
+     * Constructor for Course.
+     * @param title
+     */
     public Course(String title) {
         this.title = title;
     }
 
+    /**
+     * Getters and setters for all the fields.
+     * @return
+     */
     public int getId() {
         return id;
     }
@@ -87,30 +101,36 @@ public class Course {
         this.review = review;
     }
     
+    public List<Student> getStudents() {
+        return students;
+    }
+    
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
+
     @Override
     public String toString() {
         return "Course [id=" + id + ", title=" + title + ", instructor=" + instructor + "]";
     }
 
+    /**
+     * Method to add reviews for courses.
+     * @param rev
+     */
     public void addReview(Review rev){
         if(review == null) review = new ArrayList<>();
 
         review.add(rev);
     }
 
+    /**
+     * Method to add students base on the courses.
+     * @param stud
+     */
     public void addStudent(Student stud) {
         if(students == null) students = new ArrayList<>();
 
         students.add(stud);
     }
-
-    public List<Student> getStudents() {
-        return students;
-    }
-
-    public void setStudents(List<Student> students) {
-        this.students = students;
-    }
-
-    
 }

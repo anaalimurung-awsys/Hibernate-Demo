@@ -6,6 +6,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+/**
+ * Review class.
+ */
 @Entity
 public class Review {
     
@@ -17,13 +20,24 @@ public class Review {
     @Column(name="comments")
     private String comments;
 
+    /**
+     * Non-parameterized constructor.
+     */
     public Review() {
     }
 
+    /**
+     * Parametized constructor for Review.
+     * @param comments
+     */
     public Review(String comments) {
         this.comments = comments;
     }
 
+    /**
+     * Getters and setters for all the fields.
+     * @return
+     */
     public int getId() {
         return id;
     }
