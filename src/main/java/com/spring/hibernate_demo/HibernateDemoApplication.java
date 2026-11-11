@@ -25,9 +25,10 @@ public class HibernateDemoApplication {
 	@Bean 
 	CommandLineRunner commandLineRunner (StudentDao studentDao) {
 		return runner -> {
-			createStudent(studentDao);
+			// createStudent(studentDao);
 			// readStudent(studentDao);
 			// queryStudents(studentDao);
+			queryStudentByLastName(studentDao);
 			// updateStudent(studentDao);
 			// deleteStudent(studentDao);
 			// deleteAllStudent(studentDao);
@@ -77,6 +78,14 @@ public class HibernateDemoApplication {
 		List<Student> students = studentDao.findAll();
 
 		for(Student s : students) {
+			System.out.println(s);
+		}
+	}
+
+	private void queryStudentByLastName (StudentDao studentDao) {
+		List<Student> studs = studentDao.findByLastName("Kreideprinz");
+
+		for(Student s : studs) {
 			System.out.println(s);
 		}
 	}
