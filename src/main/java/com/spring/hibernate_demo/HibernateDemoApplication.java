@@ -36,13 +36,14 @@ public class HibernateDemoApplication {
 	 * @param studentDao
 	 * @return
 	 */
-	// @Bean 
+	@Bean 
 	CommandLineRunner commandLineRunner (StudentDao studentDao) {
 		return runner -> {
 		/* --- THESE METHODS ARE FROM THE MAIN BRANCH --- */
 			createStudent(studentDao);
 			// readStudent(studentDao);
 			// queryStudents(studentDao);
+			// queryStudentByLastName(studentDao);
 			// updateStudent(studentDao);
 			// deleteStudent(studentDao);
 			// deleteAllStudent(studentDao);
@@ -123,6 +124,18 @@ public class HibernateDemoApplication {
 		List<Student> students = studentDao.findAll();
 
 		for(Student s : students) {
+			System.out.println(s);
+		}
+	}
+
+	/**
+	 * Method to query student by last name
+	 * @param studentDao
+	 */
+	private void queryStudentByLastName (StudentDao studentDao) {
+		List<Student> studs = studentDao.findByLastName("Kreideprinz");
+
+		for(Student s : studs) {
 			System.out.println(s);
 		}
 	}
