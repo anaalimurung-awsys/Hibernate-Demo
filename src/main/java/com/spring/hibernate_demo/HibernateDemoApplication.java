@@ -82,6 +82,10 @@ public class HibernateDemoApplication {
 		}
 	}
 
+	/**
+	 * Method to query students by last name
+	 * @param studentDao
+	 */
 	private void queryStudentByLastName (StudentDao studentDao) {
 		List<Student> studs = studentDao.findByLastName("Kreideprinz");
 
