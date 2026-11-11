@@ -134,7 +134,8 @@ public class AppDaoImplement implements AppDao {
         @Override 
         public Student findStudentAndCoursesByStudentId(int id){
             TypedQuery<Student> query = em.createQuery(
-                "SELECT s FROM Student s JOIN FETCH s.courses WHERE s.id=:data",
+                "SELECT s FROM Student s " + 
+                "JOIN FETCH s.courses WHERE s.id=:data",
                 Student.class  
             );
 

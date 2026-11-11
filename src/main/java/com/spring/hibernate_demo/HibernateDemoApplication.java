@@ -3,7 +3,7 @@ package com.spring.hibernate_demo;
 import com.spring.hibernate_demo.dao.AppDao;
 import com.spring.hibernate_demo.dao.StudentDao;
 import com.spring.hibernate_demo.entity.Course;
-// import com.spring.hibernate_demo.dao.StudentDao;
+import com.spring.hibernate_demo.dao.StudentDao;
 import com.spring.hibernate_demo.entity.Instructor;
 import com.spring.hibernate_demo.entity.InstructorDetail;
 import com.spring.hibernate_demo.entity.Review;
@@ -36,39 +36,49 @@ public class HibernateDemoApplication {
 	 * @param studentDao
 	 * @return
 	 */
-	@Bean 
-	CommandLineRunner commandLineRunner (AppDao app) {
+	// @Bean 
+	CommandLineRunner commandLineRunner (StudentDao studentDao) {
 		return runner -> {
 		/* --- THESE METHODS ARE FROM THE MAIN BRANCH --- */
-			// createStudent(studentDao);
+			createStudent(studentDao);
 			// readStudent(studentDao);
 			// queryStudents(studentDao);
 			// updateStudent(studentDao);
 			// deleteStudent(studentDao);
 			// deleteAllStudent(studentDao);
-
-		/* --- THESE METHODS ARE FROM THE SECOND BRANCH --- */
-			// createInstructor(app);
-			// findInstructor(app);
-			// deleteInstructor(app);
-			// findInstructorDetail(app);
-			// deleteInstructorDetail(app);
-			// createInstructorWithCourses(app);
-			// findInstructorWithCourses(app);
-			// findInstructorWithCoursesJoinFetch(app);
-			// updateInstructor(app);
-			// deleteInstructorOnly(app);
-			// createCourseAndReviews(app);
-			// retrieveCourseAndReviews(app);
-			// deleteCourseAndReviews(app);
-			// createCourseAndStudents(app);
-			// findCourseAndStudents(app);
-			// findStudentAndCourses(app);
-			// addMoreCoursesForStudents(app);
-			// deleteCourseById(app);
-			deleteStudent(app);
 		};
 	}
+
+	/**
+	 * This is the command line for the second branch.
+	 * @param app
+	 * @return
+	 */
+	// @Bean 
+	// CommandLineRunner commandLineRunner (AppDao app) {
+	// 	return runner -> {
+	// 	/* --- THESE METHODS ARE FROM THE SECOND BRANCH --- */
+	// 		// createInstructor(app);
+	// 		// findInstructor(app);
+	// 		// deleteInstructor(app);
+	// 		// findInstructorDetail(app);
+	// 		// deleteInstructorDetail(app);
+	// 		// createInstructorWithCourses(app);
+	// 		// findInstructorWithCourses(app);
+	// 		// findInstructorWithCoursesJoinFetch(app);
+	// 		// updateInstructor(app);
+	// 		// deleteInstructorOnly(app);
+	// 		// createCourseAndReviews(app);
+	// 		// retrieveCourseAndReviews(app);
+	// 		// deleteCourseAndReviews(app);
+	// 		// createCourseAndStudents(app);
+	// 		// findCourseAndStudents(app);
+	// 		// findStudentAndCourses(app);
+	// 		// addMoreCoursesForStudents(app);
+	// 		// deleteCourseById(app);
+	// 		deleteStudent(app);
+	// 	};
+	// }
 
 	/**
 	 * Method to create student information.
@@ -76,9 +86,9 @@ public class HibernateDemoApplication {
 	 */
 	private void createStudent(StudentDao studentDao){
 		System.out.println("Creating student information...");
-		Student student6 = new Student("Rubedo",
+		Student student6 = new Student("Albedo",
 										"Kreideprinz",
-										"rubedo.kreideprinz@kof.com");
+										"albedo.kreideprinz@kof.com");
 		Student student5 = new Student("Klee",
 										"Kreideprinz",
 										"klee.kreideprinz@kof.com");
@@ -181,7 +191,7 @@ public class HibernateDemoApplication {
 											"Krueger",
 											"biscuit.krueger@hunter.com");
 		InstructorDetail info4 = new InstructorDetail("Hunter",
-													"Double-Star Stone Hunter");
+											"Double-Star Stone Hunter");
 
 		// this associates the objects
 		teach1.setInstructorInfo(info1);
